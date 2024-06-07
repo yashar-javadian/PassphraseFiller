@@ -1,29 +1,101 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
+      :root {
+        --dark: #262626;
+        --white: #FFF;
+      }
+
       body {
         width: 400px;
         height: 350px;
-        font-family: Arial, sans-serif;
         color: #FFF;
-        background-color: #262626;
+        background-color: var(--dark);
+        font-family: "VT323", monospace;
+        font-weight: 400;
+        font-style: normal;
+        padding: 5px;
       }
-      input, button {
-        width: 100%;
+      input {
+        width: 70%;
+        background: var(--dark);
         margin: 5px 0;
+        color: var(--white);
+        border: none;
+        font-family: "VT323", monospace;
+        font-weight: 400;
+        font-style: normal;
       }
+      input:focus{
+        border: none;
+        outline: none;
+      }
+
+      h3{
+      text-align: center;
+      }
+
+      label{
+        color: var(--white);
+        width: 30%;
+      }
+      .accountCart{
+        border: 1px solid var(--white);
+        padding: 10px;
+        text-align: center;
+      }
+      .inputWrapper{
+        display: flex;
+        text-align: start;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        padding: 4px;
+      }
+
+      button{
+        font-family: "VT323", monospace;
+        font-weight: 400;
+        font-style: normal;
+        width: 40%;
+        height: 2rem;
+        border: 1px solid var(--white);
+        background-color: var(--dark);
+        color: var(--white);
+        cursor: pointer;
+      }
+
+      button:hover{
+        background-color: var(--white);
+        color: var(--dark);
+        transition: .2s;
+      }
+
     </style>
   </head>
   <body>
-    <h3>Fill Dropdowns</h3>
-    <form id="dropdownForm">
-      <label for="username">User</label>
-      <input type="text" id="username" placeholder="Username">
-      <label for="selector1">Passphrase</label>
-      <input type="text" id="selector1" placeholder="Paste Passphrase">
-      <button type="button" id="fillButton">Fill</button>
-    </form>
+    <h3>Passphrase Filler</h3>
+    <div class="accountCart">
+      <form id="dropdownForm">
+        <div class="inputWrapper">
+          <label for="environment">Environment</label>
+          <input type="text" id="environment" placeholder="Environment">
+        </div>
+        <div class="inputWrapper">
+          <label for="username">User</label>
+          <input type="text" id="username" placeholder="Username">
+        </div>
+        <div class="inputWrapper">
+          <label for="selector1">Passphrase</label>
+          <input type="text" id="selector1" placeholder="Paste Passphrase">
+        </div>
+        <button type="button" id="fillButton">Fill</button>
+      </form>
+    </div>
     <script src="popup.js"></script>
   </body>
 </html>
