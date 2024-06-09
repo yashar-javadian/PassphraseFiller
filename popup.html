@@ -3,7 +3,7 @@
   <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
     <style>
       :root {
         --dark: #262626;
@@ -15,10 +15,13 @@
         height: 350px;
         color: #FFF;
         background-color: var(--dark);
-        font-family: "VT323", monospace;
-        font-weight: 400;
-        font-style: normal;
         padding: 5px;
+        text-align: center;
+        font-family: "Inconsolata", monospace;
+        font-optical-sizing: auto;
+        font-style: normal;
+        font-variation-settings:
+                "wdth" 100;
       }
       input {
         width: 70%;
@@ -47,6 +50,8 @@
         border: 1px solid var(--white);
         padding: 10px;
         text-align: center;
+        margin: 1rem;
+        position: relative;
       }
       .inputWrapper{
         display: flex;
@@ -75,27 +80,27 @@
         transition: .2s;
       }
 
+      .removeButton{
+        position: absolute;
+        top: 0;
+        right: 1px;
+        width: 20%;
+        margin: 1rem;
+        text-align: center;
+
+      }
+      .plus{
+        margin-top: 2rem;
+        width: 2rem;
+      }
+
     </style>
   </head>
   <body>
     <h3>Passphrase Filler</h3>
-    <div class="accountCart">
-      <form id="dropdownForm">
-        <div class="inputWrapper">
-          <label for="environment">Environment</label>
-          <input type="text" id="environment" placeholder="Environment">
-        </div>
-        <div class="inputWrapper">
-          <label for="username">User</label>
-          <input type="text" id="username" placeholder="Username">
-        </div>
-        <div class="inputWrapper">
-          <label for="selector1">Passphrase</label>
-          <input type="text" id="selector1" placeholder="Paste Passphrase">
-        </div>
-        <button type="button" id="fillButton">Fill</button>
-      </form>
+    <div id="wrapper">
     </div>
+    <button type="button" id="plusBtn" class="plus" title="Add new entry">+</button>
     <script src="popup.js"></script>
   </body>
 </html>

@@ -4,8 +4,10 @@
   "version": "1.0",
   "description": "Automatically fills dropdowns on a specific website",
   "permissions": [
+    "tabs",
     "activeTab",
-    "<all_urls>"
+    "<all_urls>",
+    "storage"
   ],
   "background": {
     "scripts": ["background.js"]
