@@ -74,6 +74,36 @@ const createCard = (index,card,additionalCard) => {
         });
     });
 
+    // Create Remove Button
+    const removeButton = document.createElement('button');
+    removeButton.setAttribute('type', 'button');
+    removeButton.setAttribute('id', `removeButton${index}`);
+    removeButton.setAttribute('class', `removeButton`);
+
+    removeButton.addEventListener('click', () => {
+        browser.storage.local.remove(`test_${index}`);
+        wrapperDiv.removeChild(accountCart)
+    });
+
+    // Create SVG Element
+    const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svgElement.setAttribute('width', '30');
+    svgElement.setAttribute('height', '20');
+    svgElement.setAttribute('viewBox', '0 0 256 256');
+
+    // Create Path Element
+    const pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    pathElement.setAttribute('fill', 'currentColor');
+    pathElement.setAttribute('d', 'M216 48h-40v-8a24 24 0 0 0-24-24h-48a24 24 0 0 0-24 24v8H40a8 8 0 0 0 0 16h8v144a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16V64h8a8 8 0 0 0 0-16M96 40a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v8H96Zm96 168H64V64h128Zm-80-104v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0m48 0v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0');
+
+    // Append Path Element to SVG Element
+    svgElement.appendChild(pathElement);
+
+    // Append SVG Element to Remove Button
+    removeButton.appendChild(svgElement);
+
+    // Append Buttons to Document Body or any other container
+    form.appendChild(removeButton);
 
 
     // Append elements to the form
@@ -86,26 +116,12 @@ const createCard = (index,card,additionalCard) => {
     wrapperDiv.appendChild(accountCart);
 }
 
-
-const getValueFromStorage = async (key) => {
-    try {
-        const result = await browser.storage.local.get(key);
-        return result[key];
-    } catch (error) {
-        console.error('Error getting value from storage:', error);
-        throw error;
-    }
-};
-
-
-
 // Retrieve values stored in browser storage on load
 (async () => {
     try {
         const allCards = await browser.storage.local.get()
         const allCardsLength = Object.keys(allCards).length
-        console.log('allCards',allCards)
-        console.log('allCardsLength',allCardsLength)
+
 
         //if there is no cards yet create one initial
         if (allCardsLength < 1) {

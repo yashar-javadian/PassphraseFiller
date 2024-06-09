@@ -49,6 +49,7 @@
         padding: 10px;
         text-align: center;
         margin: 1rem;
+        position: relative;
       }
       .inputWrapper{
         display: flex;
@@ -58,6 +59,8 @@
         margin-bottom: 1rem;
         padding: 4px;
       }
+
+
 
       button{
         font-family: "VT323", monospace;
@@ -76,6 +79,16 @@
         color: var(--dark);
         transition: .2s;
       }
+
+      .removeButton{
+        position: absolute;
+        top: 0;
+        right: 1px;
+        width: 20%;
+        margin: 1rem;
+        text-align: center;
+
+      }
       .plus{
         margin-top: 2rem;
         width: 2rem;
@@ -88,7 +101,6 @@
     <div id="wrapper">
     </div>
     <button type="button" id="plusBtn" class="plus" title="Add new entry">+</button>
-    <script src="https://unpkg.com/webextension-polyfill@latest/dist/browser-polyfill.min.js"></script>
     <script src="popup.js"></script>
   </body>
 </html>
