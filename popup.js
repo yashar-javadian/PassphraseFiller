@@ -1,6 +1,16 @@
 const plusBtn = document.getElementById('plusBtn')
 let cardIndex = 0
 
+const getAllStorageKeys = async () => {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(null, (items) => {
+            if (chrome.runtime.lastError) {
+                return reject(chrome.runtime.lastError);
+            }
+            resolve(items);
+        });
+    });
+}
 const createCard = (index,card,additionalCard) => {
 
     // Create the main div
@@ -19,7 +29,7 @@ const createCard = (index,card,additionalCard) => {
     ];
 
     if(additionalCard){
-        browser.storage.local.set({['test_' + index]:{
+        chrome.storage.local.set({['test_' + index]:{
                 env: '',
                 user: '',
                 pass: ''
@@ -45,12 +55,17 @@ const createCard = (index,card,additionalCard) => {
             const innerKey = input.id.split('_')[0];
             if(card){
                 card[innerKey] = e.target.value
-                browser.storage.local.set({ ['test_' + index]: card });
+                chrome.storage.local.set({ ['test_' + index]: card });
             }
             else{
-                const intermediateCard = await browser.storage.local.get(['test_' + index]);
+                const intermediateCard = await chrome.storage.local.get(['test_' + index],(item) => {
+                    if (chrome.runtime.lastError) {
+                        return reject(chrome.runtime.lastError);
+                    }
+                    resolve(item);
+                });
                 intermediateCard['test_' + index][innerKey] = e.target.value
-                browser.storage.local.set({ ['test_' + index]: intermediateCard['test_' + index] });
+                chrome.storage.local.set({ ['test_' + index]: intermediateCard['test_' + index] });
             }
         })
 
@@ -67,8 +82,7 @@ const createCard = (index,card,additionalCard) => {
 
     button.addEventListener('click', () => {
         const passphrase = card.pass;
-
-        browser.runtime.sendMessage({
+        chrome.runtime.sendMessage({
             action: "fillDropdowns",
             passphrase: passphrase
         });
@@ -81,7 +95,7 @@ const createCard = (index,card,additionalCard) => {
     removeButton.setAttribute('class', `removeButton`);
 
     removeButton.addEventListener('click', () => {
-        browser.storage.local.remove(`test_${index}`);
+        chrome.storage.local.remove(`test_${index}`);
         wrapperDiv.removeChild(accountCart)
     });
 
@@ -116,12 +130,12 @@ const createCard = (index,card,additionalCard) => {
     wrapperDiv.appendChild(accountCart);
 }
 
-// Retrieve values stored in browser storage on load
+// Retrieve values stored in chrome storage on load
 (async () => {
     try {
-        const allCards = await browser.storage.local.get()
-        const allCardsLength = Object.keys(allCards).length
+        const allCards = await getAllStorageKeys()
 
+        const allCardsLength = Object.keys(allCards)?.length
 
         //if there is no cards yet create one initial
         if (allCardsLength < 1) {
