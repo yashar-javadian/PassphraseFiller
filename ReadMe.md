@@ -15,7 +15,7 @@ fake users.**.
 
 ## Installation
 
-1. Download the extension from the Firefox Add-ons website.
+1. Download the extension from the [Firefox Add-ons website](https://addons.mozilla.org/de/firefox/addon/passphrase-filler/?utm_content=search&utm_medium=referral&utm_source=addons.mozilla.org) .
 2. Open Firefox and navigate to `about:addons`.
 3. Click on the gear icon and select `Install Add-on From File...`.
 4. Choose the downloaded file and click `Open`.
@@ -40,5 +40,4 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 
