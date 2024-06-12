@@ -7,7 +7,8 @@
     "tabs",
     "activeTab",
     "<all_urls>",
-    "storage"
+    "storage",
+    "clipboardRead"
   ],
   "background": {
     "scripts": ["background.js"]
