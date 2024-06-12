@@ -14,6 +14,7 @@ fake users.**.
 - **Manage Cards**: Add and remove cards containing user information.
 - **Autofill**: Add `matrix_id` of the user in `user` field and passphrase will be auto-filled without 
   a need for clicking on `Fill` button.
+- **Autocopy**: On reseting passphrase new passphrase will automatically overwrite old value within extension. 
 
 ## Installation
 
