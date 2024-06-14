@@ -69,7 +69,6 @@ const createCard = (index,card,additionalCard) => {
 
     button.addEventListener('click', () => {
         const passphrase = card.pass;
-
         browser.runtime.sendMessage({
             action: "fillDropdowns",
             passphrase: passphrase
