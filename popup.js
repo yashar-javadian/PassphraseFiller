@@ -40,17 +40,19 @@ const createCard = (index,card,additionalCard) => {
         inputElement.placeholder = input.placeholder;
         inputElement.value = input.value;
 
-        inputElement.addEventListener('change', async (e) => {
+        inputElement.addEventListener('keyup', async (e) => {
 
             const innerKey = input.id.split('_')[0];
             if(card){
-                card[innerKey] = e.target.value
-                browser.storage.local.set({ ['test_' + index]: card });
+                const cardCopy= {...card}
+                cardCopy[innerKey] = e.target.value
+                browser.storage.local.set({ ['test_' + index]: cardCopy });
             }
             else{
                 const intermediateCard = await browser.storage.local.get(['test_' + index]);
-                intermediateCard['test_' + index][innerKey] = e.target.value
-                browser.storage.local.set({ ['test_' + index]: intermediateCard['test_' + index] });
+                const test = {...intermediateCard}
+                test['test_' + index][innerKey] = e.target.value
+                browser.storage.local.set({ ['test_' + index]: test['test_' + index] });
             }
         })
 
@@ -80,9 +82,9 @@ const createCard = (index,card,additionalCard) => {
     removeButton.setAttribute('id', `removeButton${index}`);
     removeButton.setAttribute('class', `removeButton`);
 
-    removeButton.addEventListener('click', () => {
-        browser.storage.local.remove(`test_${index}`);
+    removeButton.addEventListener('click', async () => {
         wrapperDiv.removeChild(accountCart)
+        await browser.storage.local.remove(`test_${index}`);
     });
 
     // Create SVG Element
@@ -132,8 +134,9 @@ const createCard = (index,card,additionalCard) => {
             //If there are cards stored go and create them with values
             for (const idx in allCards) {
                 const card = allCards[idx];
+                const cardNumber = +idx.split('_')[1]
 
-                createCard(cardIndex,card,false)
+                createCard(cardNumber,card,false)
                 cardIndex++
             }
         }
@@ -143,7 +146,7 @@ const createCard = (index,card,additionalCard) => {
     }
 })();
 
-plusBtn.addEventListener('click', e => {
+plusBtn.addEventListener('click', () => {
   createCard(cardIndex,false,true)
     cardIndex++
 })
