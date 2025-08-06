@@ -1,3 +1,7 @@
+if (typeof browser === "undefined") {
+    var browser = chrome;
+}
+
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "fillDropdowns") {
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
