@@ -1,6 +1,6 @@
-if (typeof browser === "undefined") {
-    var browser = chrome;
-}
+const browser = (typeof globalThis.browser !== 'undefined')
+  ? globalThis.browser
+  : globalThis.chrome;
 
 function getCloudUrlFromStorage() {
     return new Promise((resolve) => {

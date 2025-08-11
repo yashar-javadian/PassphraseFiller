@@ -1,7 +1,3 @@
-if (typeof browser === "undefined") {
-    var browser = chrome;
-}
-
 let cardIndex = 0;
 
 function debounce(func, delay) {

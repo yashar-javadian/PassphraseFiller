@@ -1,7 +1,3 @@
-if (typeof browser === "undefined") {
-    var browser = chrome;
-}
-
 const fetchTeamAccounts = async () => {
     try {
         const url = await getCloudUrlFromStorage();
